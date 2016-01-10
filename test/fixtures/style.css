@@ -1,0 +1,17 @@
+body {
+    color: red;
+}
+
+#test--s-- {
+    color: green;
+}
+
+#test2--s-- {
+    color: green;
+}
+
+#test3--s--, #test4--s-- {
+    color: green;
+}
+
+#test2--s-- {width: 100px;}

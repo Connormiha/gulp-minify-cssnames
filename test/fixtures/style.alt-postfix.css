@@ -1,0 +1,17 @@
+body {
+    color: red;
+}
+
+#test--alt-postfix-- {
+    color: green;
+}
+
+#test2--alt-postfix-- {
+    color: green;
+}
+
+#test3--alt-postfix--, #test4--alt-postfix-- {
+    color: green;
+}
+
+#test2--s-- {width: 100px;}

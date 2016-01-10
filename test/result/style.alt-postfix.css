@@ -1,0 +1,17 @@
+body {
+    color: red;
+}
+
+#a0 {
+    color: green;
+}
+
+#a1 {
+    color: green;
+}
+
+#a2, #a3 {
+    color: green;
+}
+
+#test2--s-- {width: 100px;}
