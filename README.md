@@ -17,11 +17,11 @@ We have css file:
 
 ```javascript
 var gulp = require('gulp');
-var gulp-minify-cssnames = require('gulp-minify-cssnames');
+var gulpMinifyCssNames = require('gulp-minify-cssnames');
 
 gulp.task('minify-css-names', function() {
     return gulp.src(['src/*.css'])
-        .pipe(gulp-minify-cssnames())
+        .pipe(gulpMinifyCssNames())
         .pipe(gulp.dest('build'))
 })
 ```
@@ -64,11 +64,11 @@ var $mainMenu = document.querySelector('#main-menu--s--');
 ##### Gulp task
 ```javascript
 var gulp = require('gulp');
-var gulp-minify-cssnames = require('gulp-minify-cssnames');
+var gulpMinifyCssNames = require('gulp-minify-cssnames');
 
 gulp.task('minify-css-names', function() {
     return gulp.src(['src/style.css', 'src/index.html', 'src/app.js'])
-        .pipe(gulp-minify-cssnames())
+        .pipe(gulpMinifyCssNames())
         .pipe(gulp.dest('build'))
 })
 ```
@@ -104,6 +104,7 @@ Type: `Object`
 
 ##### options.postfix
 Type: `String`  
-Default: `--s--`  
+Default: `"--s--"`  
 
-Alternative postfix for css names
+Alternative postfix for css names.  
+`Important: postfix should be valid for css class and id`
