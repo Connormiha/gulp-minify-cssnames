@@ -1,6 +1,6 @@
 {
   "name": "gulp-minify-cssnames",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Gulp plugin for minify css classes and css ids",
   "main": "index.js",
   "scripts": {
@@ -17,14 +17,16 @@
   },
   "homepage": "https://github.com/Connormiha/gulp-minify-cssnames#readme",
   "dependencies": {
-    "decimal-to-any": "0.0.2",
+    "decimal-to-any": "0.0.5",
     "readable-stream": "^2.0.5",
     "replacestream": "^4.0.0"
   },
   "devDependencies": {
     "chai": "^3.4.1",
     "concat-stream": "^1.5.1",
+    "gulp": "^3.9.0",
     "mocha": "^2.3.4",
+    "stream-assert": "^2.0.3",
     "vinyl": "^1.1.0"
   }
 }

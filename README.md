@@ -23,7 +23,7 @@ gulp.task('minify-css-names', function() {
     return gulp.src(['src/*.css'])
         .pipe(gulpMinifyCssNames())
         .pipe(gulp.dest('build'))
-})
+});
 ```
 
 #### Result
@@ -70,7 +70,7 @@ gulp.task('minify-css-names', function() {
     return gulp.src(['src/style.css', 'src/index.html', 'src/app.js'])
         .pipe(gulpMinifyCssNames())
         .pipe(gulp.dest('build'))
-})
+});
 ```
 
 #### Result
@@ -108,3 +108,6 @@ Default: `"--s--"`
 
 Alternative postfix for css names.  
 `Important: postfix should be valid for css class and id`
+
+### Why need a postfix?
+This plugin match by RegExp in all file/stream content. This will reduce the likelihood of wrong replacement.
