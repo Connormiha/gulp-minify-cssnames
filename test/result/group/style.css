@@ -1,0 +1,17 @@
+body {
+    color: red;
+}
+
+#a2 {
+    color: green;
+}
+
+#a3 {
+    color: green;
+}
+
+#a0, #a4 {
+    color: green;
+}
+
+#a3 {width: 100px;}

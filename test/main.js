@@ -2,7 +2,9 @@
 
 var fs = require('fs');
 var concatStream = require('concat-stream');
+var gulp = require('gulp');
 var expect = require('chai').expect;
+var streamAssert = require('stream-assert');
 var File = require('vinyl');
 var minify = require('../');
 
@@ -82,6 +84,22 @@ describe('gulp-minify-cssnames', function() {
 
             stream.write(file);
             stream.end();
+        });
+
+        it('Should work with group files in real Gulp', function(done) {
+            gulp.src(['test/fixtures/group/app.js', 'test/fixtures/group/style.css', 'test/fixtures/group/index.html'])
+                .pipe(minify())
+                .pipe(streamAssert.length(3))
+                .pipe(streamAssert.first(function(d) {
+                    expect(String(d.contents)).to.equal(fs.readFileSync('test/result/group/app.js', 'utf8'));
+                }))
+                .pipe(streamAssert.second(function(d) {
+                    expect(String(d.contents)).to.equal(fs.readFileSync('test/result/group/style.css', 'utf8'));
+                }))
+                .pipe(streamAssert.nth(2, function(d) {
+                    expect(String(d.contents)).to.equal(fs.readFileSync('test/result/group/index.html', 'utf8'));
+                }))
+                .pipe(streamAssert.end(done));
         });
     });
 
