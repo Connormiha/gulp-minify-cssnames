@@ -1,4 +1,4 @@
-# gulp-minify-cssnames [![NPM version][npm-image]][npm-url]
+# gulp-minify-cssnames
 > Gulp plugin for minify css classes and css ids
 
 ## Usage
