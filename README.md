@@ -1,4 +1,4 @@
-# gulp-minify-cssnames
+# gulp-minify-cssnames [![NPM version][npm-image]][npm-url]
 > Gulp plugin for minify css classes and css ids
 
 ## Usage
@@ -111,3 +111,6 @@ Alternative postfix for css names.
 
 ### Why need a postfix?
 This plugin match by RegExp in all file/stream content. This will reduce the likelihood of wrong replacement.
+
+[npm-url]: https://npmjs.org/package/gulp-minify-cssnames
+[npm-image]: https://img.shields.io/npm/v/gulp-minify-cssnames.svg
