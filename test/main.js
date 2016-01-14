@@ -87,19 +87,39 @@ describe('gulp-minify-cssnames', function() {
         });
 
         it('Should work with group files in real Gulp', function(done) {
-            gulp.src(['test/fixtures/group/app.js', 'test/fixtures/group/style.css', 'test/fixtures/group/index.html'])
+            var files = ['test/fixtures/group/app.js', 'test/fixtures/group/style.css', 'test/fixtures/group/index.html'];
+            var count = files.length;
+            var stream = gulp.src(files)
                 .pipe(minify())
-                .pipe(streamAssert.length(3))
-                .pipe(streamAssert.first(function(d) {
-                    expect(String(d.contents)).to.equal(fs.readFileSync('test/result/group/app.js', 'utf8'));
-                }))
-                .pipe(streamAssert.second(function(d) {
-                    expect(String(d.contents)).to.equal(fs.readFileSync('test/result/group/style.css', 'utf8'));
-                }))
-                .pipe(streamAssert.nth(2, function(d) {
-                    expect(String(d.contents)).to.equal(fs.readFileSync('test/result/group/index.html', 'utf8'));
-                }))
-                .pipe(streamAssert.end(done));
+                .pipe(streamAssert.length(count));
+
+            files.forEach(function (item, index) {
+                stream = stream.pipe(streamAssert.nth(index, function(d) {
+                    expect(String(d.contents)).to.equal(fs.readFileSync(item.replace('fixtures', 'result'), 'utf8'));
+                    if (--count === 0) {
+                        done();
+                    }
+                }));
+            });
+        });
+
+        it('Should work with group files in real Gulp (stream)', function(done) {
+            var files = ['test/fixtures/group/app.js', 'test/fixtures/group/style.css', 'test/fixtures/group/index.html'];
+            var count = files.length;
+            var stream = gulp.src(files, {buffer: false})
+                .pipe(minify())
+                .pipe(streamAssert.length(count));
+
+            files.forEach(function (item, index) {
+                stream = stream.pipe(streamAssert.nth(index, function(d) {
+                    d.contents.pipe(concatStream({encoding: 'string'}, function(data) {
+                        expect(data).to.equal(fs.readFileSync(item.replace('fixtures', 'result'), 'utf8'));
+                        if (--count === 0) {
+                            done();
+                        }
+                    }));
+                }));
+            });
         });
     });
 
