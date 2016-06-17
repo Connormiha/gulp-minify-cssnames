@@ -1,44 +1,53 @@
 'use strict';
 
-var Transform = require('readable-stream/transform');
-var rs = require('replacestream');
-var decToAny = require('decimal-to-any');
+const Transform = require('readable-stream/transform');
+const rs = require('replacestream');
+const decToAny = require('decimal-to-any');
 
-var decToAnyOptions = {
+const decToAnyOptions = {
     alphabet: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_'
 };
 
-var Replacer = function(options) {
-    var postfix = options.postfix || '--s--';
+class Replacer {
+    constructor(options) {
+        let postfix = options.postfix || '--s--';
 
-    var currentIndex = 0;
-    var namesMap = {};
+        this._currentIndex = 0;
+        this._namesMap = Object.create(null);
 
-    this.regExp = new RegExp('[\\w_-]+?' + postfix, 'ig');
-    this.replaceFn = function(str) {
-        if (!namesMap[str]) {
-            namesMap[str] = 'a' + decToAny(currentIndex, decToAnyOptions.alphabet.length, decToAnyOptions);
-            currentIndex++;
+        this.regExp = new RegExp(`[\\w_-]+?${postfix}`, 'ig');
+        this.replace = this.replace.bind(this);
+    }
+
+    /**
+     * Replaces found substring to number from special alphabet
+     * @param {String} str
+     * @return {String}
+     */
+    replace(str) {
+        if (!this._namesMap[str]) {
+            this._namesMap[str] = `a${decToAny(this._currentIndex, decToAnyOptions.alphabet.length, decToAnyOptions)}`;
+            this._currentIndex++;
         }
 
-        return namesMap[str];
-    };
+        return this._namesMap[str];
+    }
 }
 
-module.exports = function(options) {
+module.exports = (options) => {
     options = options || {};
-    var replacer = new Replacer(options);
+    let replacer = new Replacer(options);
 
     return new Transform({
         objectMode: true,
-        transform: function(file, enc, callback) {
+        transform(file, enc, callback) {
             if (file.isStream()) {
-                file.contents = file.contents.pipe(rs(replacer.regExp, replacer.replaceFn));
+                file.contents = file.contents.pipe(rs(replacer.regExp, replacer.replace));
                 return callback(null, file);
             }
 
             if (file.isBuffer()) {
-                file.contents = new Buffer(String(file.contents).replace(replacer.regExp, replacer.replaceFn));
+                file.contents = new Buffer(String(file.contents).replace(replacer.regExp, replacer.replace));
                 return callback(null, file);
             }
 

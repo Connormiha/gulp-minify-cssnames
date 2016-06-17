@@ -1,5 +1,8 @@
 # gulp-minify-cssnames [![NPM version][npm-image]][npm-url]
-> Gulp plugin for minify css classes and css ids
+> Gulp plugin for minify css classes and css ids  
+
+> Since version 2.0 supported only Node.js 4+
+> If you need support Node 0.12 or older, then install version 1.0.2
 
 ## Usage
 Minifying all names(class, id) with some postfix (default: '--s--').
