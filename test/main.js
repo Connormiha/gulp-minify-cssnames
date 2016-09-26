@@ -121,6 +121,42 @@ describe('gulp-minify-cssnames', () => {
                 }));
             });
         });
+
+        it('should work with prefix', (done) => {
+            let stream = minify({postfix: '', prefix: 'prefix---'});
+            let file = new File({
+                path: 'test/fixtures/style_prefix.css',
+                cwd: 'test/',
+                base: 'test/fixtures',
+                contents: fs.readFileSync('test/fixtures/style_prefix.css')
+            });
+
+            stream.on('data', (file) => {
+                expect(String(file.contents)).to.equal(fs.readFileSync('test/result/style.css', 'utf8'));
+                done();
+            });
+
+            stream.write(file);
+            stream.end();
+        });
+
+        it('should work with prefix + postfix', (done) => {
+            let stream = minify({prefix: 'prefix---'});
+            let file = new File({
+                path: 'test/fixtures/style_prefix_postfix.css',
+                cwd: 'test/',
+                base: 'test/fixtures',
+                contents: fs.readFileSync('test/fixtures/style_prefix_postfix.css')
+            });
+
+            stream.on('data', (file) => {
+                expect(String(file.contents)).to.equal(fs.readFileSync('test/result/style.css', 'utf8'));
+                done();
+            });
+
+            stream.write(file);
+            stream.end();
+        });
     });
 
 });

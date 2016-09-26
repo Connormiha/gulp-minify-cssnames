@@ -5,7 +5,7 @@
 > If you need support Node 0.12 or older, then install version 1.0.2
 
 ## Usage
-Minifying all names(class, id) with some postfix (default: '--s--').
+Minifying all names(class, id) with some postfix (default: '--s--') or prefix (default not use).
 
 ### Example
 We have css file:
@@ -109,10 +109,14 @@ Type: `Object`
 Type: `String`  
 Default: `"--s--"`  
 
+##### options.prefix
+Type: `String`  
+Default: `""`  
+
 Alternative postfix for css names.  
 `Important: postfix should be valid for css class and id`
 
-### Why need a postfix?
+### Why need a postfix or prefix?
 This plugin match by RegExp in all file/stream content. This will reduce the likelihood of wrong replacement.
 
 [npm-url]: https://npmjs.org/package/gulp-minify-cssnames

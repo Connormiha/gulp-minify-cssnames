@@ -1,0 +1,17 @@
+body {
+    color: red;
+}
+
+#prefix---test {
+    color: green;
+}
+
+#prefix---test2 {
+    color: green;
+}
+
+#prefix---test3, #prefix---test4 {
+    color: green;
+}
+
+#prefix---test2 {width: 100px;}

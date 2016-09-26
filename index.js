@@ -10,12 +10,13 @@ const decToAnyOptions = {
 
 class Replacer {
     constructor(options) {
-        let postfix = options.postfix || '--s--';
+        let postfix = 'postfix' in options ? options.postfix : '--s--',
+            prefix = options.prefix || '';
 
         this._currentIndex = 0;
         this._namesMap = Object.create(null);
 
-        this.regExp = new RegExp(`[\\w_-]+?${postfix}`, 'ig');
+        this.regExp = new RegExp(`${prefix}[\\w_-]+${postfix}`, 'ig');
         this.replace = this.replace.bind(this);
     }
 
@@ -35,8 +36,7 @@ class Replacer {
 }
 
 module.exports = (options) => {
-    options = options || {};
-    let replacer = new Replacer(options);
+    let replacer = new Replacer(options || {});
 
     return new Transform({
         objectMode: true,
