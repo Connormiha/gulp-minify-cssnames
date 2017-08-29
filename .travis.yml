@@ -1,0 +1,19 @@
+sudo: false
+language: node_js
+
+matrix:
+  include:
+    - os: linux
+      node_js: "4"
+    - os: osx
+      node_js: "8"
+
+before_script:
+  - npm run lint
+
+cache:
+  yarn: true
+
+notifications:
+  email:
+    on_success: never

@@ -11,8 +11,8 @@ const minify = require('../');
 describe('gulp-minify-cssnames', () => {
     describe('Replace CSS names', () => {
         it('should work with buffer', (done) => {
-            let stream = minify();
-            let file = new File({
+            const stream = minify();
+            const file = new File({
                 path: 'test/fixtures/style.css',
                 cwd: 'test/',
                 base: 'test/fixtures',
@@ -29,8 +29,8 @@ describe('gulp-minify-cssnames', () => {
         });
 
         it('should work with stream', (done) => {
-            let stream = minify();
-            let file = new File({
+            const stream = minify();
+            const file = new File({
                 path: 'test/fixtures/style.css',
                 cwd: 'test/',
                 base: 'test/fixtures',
@@ -49,8 +49,8 @@ describe('gulp-minify-cssnames', () => {
         });
 
         it('should work with buffer (alternative postfix)', (done) => {
-            let stream = minify({postfix: '--alt-postfix--'});
-            let file = new File({
+            const stream = minify({postfix: '--alt-postfix--'});
+            const file = new File({
                 path: 'test/fixtures/style.alt-postfix.css',
                 cwd: 'test/',
                 base: 'test/fixtures',
@@ -67,8 +67,8 @@ describe('gulp-minify-cssnames', () => {
         });
 
         it('should work with stream (alternative postfix)', (done) => {
-            let stream = minify({postfix: '--alt-postfix--'});
-            let file = new File({
+            const stream = minify({postfix: '--alt-postfix--'});
+            const file = new File({
                 path: 'test/fixtures/style.alt-postfix.css',
                 cwd: 'test/',
                 base: 'test/fixtures',
@@ -87,7 +87,7 @@ describe('gulp-minify-cssnames', () => {
         });
 
         it('should work with group files in real Gulp', (done) => {
-            let files = ['test/fixtures/group/app.js', 'test/fixtures/group/style.css', 'test/fixtures/group/index.html'];
+            const files = ['test/fixtures/group/app.js', 'test/fixtures/group/style.css', 'test/fixtures/group/index.html'];
             let count = files.length;
             let stream = gulp.src(files)
                 .pipe(minify())
@@ -104,7 +104,7 @@ describe('gulp-minify-cssnames', () => {
         });
 
         it('should work with group files in real Gulp (stream)', (done) => {
-            let files = ['test/fixtures/group/app.js', 'test/fixtures/group/style.css', 'test/fixtures/group/index.html'];
+            const files = ['test/fixtures/group/app.js', 'test/fixtures/group/style.css', 'test/fixtures/group/index.html'];
             let count = files.length;
             let stream = gulp.src(files, {buffer: false})
                 .pipe(minify())
@@ -123,8 +123,8 @@ describe('gulp-minify-cssnames', () => {
         });
 
         it('should work with prefix', (done) => {
-            let stream = minify({postfix: '', prefix: 'prefix---'});
-            let file = new File({
+            const stream = minify({postfix: '', prefix: 'prefix---'});
+            const file = new File({
                 path: 'test/fixtures/style_prefix.css',
                 cwd: 'test/',
                 base: 'test/fixtures',
@@ -141,8 +141,8 @@ describe('gulp-minify-cssnames', () => {
         });
 
         it('should work with prefix + postfix', (done) => {
-            let stream = minify({prefix: 'prefix---'});
-            let file = new File({
+            const stream = minify({prefix: 'prefix---'});
+            const file = new File({
                 path: 'test/fixtures/style_prefix_postfix.css',
                 cwd: 'test/',
                 base: 'test/fixtures',

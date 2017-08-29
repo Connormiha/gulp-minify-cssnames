@@ -4,7 +4,9 @@
   "description": "Gulp plugin for minify css classes and css ids",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint .",
+    "prepublish": "npm test && npm run lint"
   },
   "engines": {
     "node": ">=4.0.0"
@@ -20,16 +22,19 @@
   },
   "homepage": "https://github.com/Connormiha/gulp-minify-cssnames#readme",
   "dependencies": {
-    "decimal-to-any": "^1.0.0",
+    "decimal-to-any": "^1.0.5",
     "readable-stream": "^2.1.5",
     "replacestream": "^4.0.2"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
+    "chai": "4.1.1",
     "concat-stream": "^1.5.2",
+    "eslint": "^4.5.0",
+    "eslint-plugin-chai-expect": "^1.1.1",
+    "eslint-plugin-mocha": "^4.11.0",
     "gulp": "^3.9.0",
     "mocha": "^3.0.2",
     "stream-assert": "^2.0.3",
-    "vinyl": "^1.2.0"
+    "vinyl": "2.1.0"
   }
 }
